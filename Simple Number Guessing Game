@@ -1,0 +1,86 @@
+
+
+import random
+
+Title = "W"
+print("Hello! Welcome to \033[1mNumber Guessing\033[0m!")
+Bug = False
+Score = 0
+
+while(Title != "Q"):
+    Title = input("\nPlease Choose: Play(P) Quit(Q): ")
+    if(Title == "P"):
+        NumRange0 = (input("Enter First Range(Integer): "))
+        Bug = False
+        #test int/str
+        try:
+            int(NumRange0)
+        except ValueError:
+            Bug = True
+
+        if(Bug == False):
+            NumRange1 = (input("Enter Second Range(Integer): "))
+            #test int/str
+
+            try:
+                int(NumRange1)
+            except ValueError:
+                Bug = True
+
+            if(Bug == False):
+                #setup
+                NumRange0 = int(NumRange0)
+                NumRange1 = int(NumRange1)
+                a = random.randint(NumRange0, NumRange1)
+
+                chances = (input("Enter Lives(0 = endless): "))
+                try:
+                    int(chances)
+                except ValueError:
+                    Bug = True
+
+                if(Bug == False):
+                    chances = int(chances)
+                    Lives = chances;
+                #game
+                    if(Lives == 0):
+                        Lives = Lives - 1
+                    while(Lives != 0):
+                        print("\nYour Lives:", Lives)
+                        print("\nYour Score:", Score)
+                        print("\nYour Minimum Number is: ", NumRange0)
+                        print("Your Maximum Number is: ", NumRange1)
+                        inputs = (input("Enter A Number: "))
+                        try:
+                            int(inputs)
+                        except ValueError:
+                            Bug = True
+
+                        if(Bug == False):
+                            inputs = int(inputs)
+                            if(inputs == a):
+                                print("\n\t --------Correct!!-------- \t")
+                                print("\n\t --------The Number Has Changed!-------- \t")
+                                Score = Score + 1
+                                a = random.randint(NumRange0, NumRange1)
+                            else:
+                                print("\n\t --------False!!-------- \t")
+                                Lives = Lives - 1
+                            if(Lives == 0):
+                                print("\n--------You Lose!--------")
+                        else:
+                            print("You can only Enter Integer NUMBER!")
+                            Bug = False
+                else:
+                    print("You can only Enter Integer NUMBER!")
+            else:
+                print("You can only Enter Integer NUMBER!")
+        else:
+            print("You can only Enter Integer NUMBER!")
+
+    elif(Title != "P"):
+        print("\t--------Please Enter (P)Play or (Q)Quit!--------\t")
+
+    if(Title == "Q"):
+        print("--------Bye Bye!--------")
+        break;
